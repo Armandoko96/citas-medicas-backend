@@ -12,7 +12,9 @@ app.secret_key = os.environ.get('SECRET_KEY', 'supersecretkey123_estudiante')
 frontend_url = os.environ.get('FRONTEND_URL')
 allowed_origins = ["http://localhost:5173", "http://127.0.0.1:5173"]
 if frontend_url:
-    allowed_origins.append(frontend_url.strip())
+    clean_url = frontend_url.strip().rstrip('/')
+    allowed_origins.append(clean_url)
+    allowed_origins.append(clean_url + "/")
 
 CORS(app, supports_credentials=True, origins=allowed_origins)
 
